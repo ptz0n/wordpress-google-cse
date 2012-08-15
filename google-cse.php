@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: Google CSE
-Description: Google powered Custom Search for your WordPress site or blog.
+Plugin URI: http://wordpress.org/extend/plugins/google-cse/
+Description: Google powered search for your WordPress site or blog.
 Version: 1.0
 Author: Erik Eng
 Author URI: http://erikeng.se/
@@ -84,3 +85,51 @@ function gcse_request($test = false)
  * TODO: Cache
  *
  */
+
+/**
+ * Search Results
+ *
+ * @since 1.0
+ *
+ */
+function gcse_results()
+{
+    if(is_search()) {
+        global $posts, $wp_query;
+
+        $posts[] = (object)array(
+            'post_title' => 'test',
+            'post_excerpt' => 'content',
+            'guid' => 'http://www.google.com/',
+            'post_type' => 'search',
+            'post_id' => gcse_url_to_postid('http://wordpress.dev/?page_id=2')
+        );
+
+        echo '<pre>';
+        print_r($posts);
+        die;
+
+        // Update post count
+        $wp_query->post_count++;
+    }
+}
+add_action('wp_head', 'gcse_results');
+
+/**
+ * URL to Post ID
+ *
+ * @param string $url
+ *
+ * @since 1.0
+ *
+ * @see url_to_postid
+ * @see http://betterwp.net/wordpress-tips/url_to_postid-for-custom-post-types/
+ *
+ * @return int
+ */
+function gcse_url_to_postid($url)
+{
+    // TODO: Check url to post id map cache
+
+    return url_to_postid($url);
+}

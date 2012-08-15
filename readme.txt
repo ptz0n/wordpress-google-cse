@@ -2,17 +2,17 @@
 Contributors: ptz0n
 Tags: google, search, ajax, custom search engine, cse
 Requires at least: 3.0
-Tested up to: 3.0
+Tested up to: 3.3.1
 Stable tag: 1.0
 License: GPLv2 or later
 
-Google powered Search for your WordPress site or blog.
+Google powered search for your WordPress site or blog.
 
 == Description ==
 
 This is not another iframe embed or AJAX result listing plugin. Search results from your Google Custom Search Engine is served via your WordPress search listing. No need to customize your theme or search box.
 
-PS: You'll need an [Google API key](http://) and a [Google Custom Search Engine ID](http://) to use it. DS.
+PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](http://www.google.com/cse/) to use it. DS.
 
 == Installation ==
 
