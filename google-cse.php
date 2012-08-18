@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '0.1');
+define('GCSE_VERSION', '1.0');
 
 /**
  * Security
@@ -53,13 +53,21 @@ function gcse_request($test = false)
 
     if(isset($options['key']) && $options['key'] &&
         isset($options['id']) && $options['id']) {
+
+        // Build URL
         $params = http_build_query(array(
             'key' => trim($options['key']),
             'cx'  => trim($options['id']),
             'alt' => 'json',
-            'q'   => 'webb'/*get_search_query()*/));
+            'q'   => get_search_query()));
         $url = 'https://www.googleapis.com/customsearch/v1?'.$params;
 
+        // Check for and return cached response
+        if($response = get_transient('gcse_'.md5($url))) {
+            return json_decode($response, true);
+        }
+
+        // Request response
         if(function_exists('curl_version')) {
             $ch = curl_init();
             curl_setopt_array($ch, array(
@@ -73,18 +81,15 @@ function gcse_request($test = false)
         }
     }
 
+    // Save and return new response
     if(isset($response)) {
+        set_transient('gcse_'.md5($url), $response, 3600);
         return json_decode($response, true);
     }
     else {
         return array();
     }
 }
-
-/**
- * TODO: Cache
- *
- */
 
 /**
  * Search Results
@@ -96,21 +101,40 @@ function gcse_results()
 {
     if(is_search()) {
         global $posts, $wp_query;
+        $response = gcse_request();
 
-        $posts[] = (object)array(
-            'post_title' => 'test',
-            'post_excerpt' => 'content',
-            'guid' => 'http://www.google.com/',
-            'post_type' => 'search',
-            'post_id' => gcse_url_to_postid('http://wordpress.dev/?page_id=2')
-        );
+        if(isset($response['items']) && $response['items']) {
+            $results = array();
+            foreach($response['items'] as $result) {
+                if($id = gcse_url_to_postid($result['link'])) {
+                    $post = get_post($id);
+                }
+                else {
+                    $post = (object)array(
+                        'post_title'   => $result['title'],
+                        'post_excerpt' => $result['snippet'],
+                        'post_content' => $result['htmlSnippet'],
+                        'guid'         => $result['link'],
+                        'post_type'    => 'search',
+                        'ID'           => 0
+                    );
+                }
+                $results[] = $post;
+            }
 
-        echo '<pre>';
-        print_r($posts);
-        die;
+            // TODO: Update $posts with new data
 
-        // Update post count
-        $wp_query->post_count++;
+            // Set results as posts
+            $posts = $results;
+
+            // Update post count
+            $wp_query->post_count = count($posts);
+
+            // TODO: Enable pagination
+
+            // Apply filters
+            add_filter('the_permalink', 'gcse_permalink');
+        }
     }
 }
 add_action('wp_head', 'gcse_results');
@@ -132,4 +156,25 @@ function gcse_url_to_postid($url)
     // TODO: Check url to post id map cache
 
     return url_to_postid($url);
+}
+
+/**
+ * Permalink Filter
+ *
+ * @since 1.0
+ *
+ * @param string $the_permalink
+ *
+ * @return string
+ *
+ */
+function gcse_permalink($the_permalink)
+{
+    if(is_main_query() && $the_permalink == '') {
+        global $post;
+        return $post->guid;
+    }
+    else {
+        return $the_permalink;
+    }
 }
