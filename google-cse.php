@@ -49,18 +49,25 @@ if(is_admin()) {
  */
 function gcse_request($test = false)
 {
+    global $wp_query;
     $options = get_option('gcse_options');
 
     if(isset($options['key']) && $options['key'] &&
         isset($options['id']) && $options['id']) {
 
         // Build URL
+        $num    = $wp_query->query_vars['posts_per_page'] < 11 ?
+            $wp_query->query_vars['posts_per_page'] : 10;
+        $start  = $wp_query->query_vars['paged'] ?
+            ($wp_query->query_vars['paged']-1)*$num+1 : 1;
         $params = http_build_query(array(
-            'key' => trim($options['key']),
-            'cx'  => trim($options['id']),
-            'alt' => 'json',
-            'q'   => get_search_query()));
-        $url = 'https://www.googleapis.com/customsearch/v1?'.$params;
+            'key'   => trim($options['key']),
+            'cx'    => trim($options['id']),
+            'alt'   => 'json',
+            'num'   => $num,
+            'start' => $start,
+            'q'     => get_search_query()));
+        $url    = 'https://www.googleapis.com/customsearch/v1?'.$params;
 
         // Check for and return cached response
         if($response = get_transient('gcse_'.md5($url))) {
@@ -104,6 +111,7 @@ function gcse_results()
         $response = gcse_request();
 
         if(isset($response['items']) && $response['items']) {
+
             $results = array();
             foreach($response['items'] as $result) {
                 if($id = gcse_url_to_postid($result['link'])) {
@@ -130,7 +138,12 @@ function gcse_results()
             // Update post count
             $wp_query->post_count = count($posts);
 
-            // TODO: Enable pagination
+            // Pagination
+            $posts_per_page = $wp_query->query_vars['posts_per_page'] < 11 ?
+                $wp_query->query_vars['posts_per_page'] : 10;
+            $wp_query->max_num_pages = ceil(
+                $response['searchInformation']['totalResults'] /
+                $posts_per_page);
 
             // Apply filters
             add_filter('the_permalink', 'gcse_permalink');
