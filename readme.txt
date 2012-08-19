@@ -2,7 +2,7 @@
 Contributors: ptz0n
 Tags: google, search, ajax, custom search engine, cse
 Requires at least: 3.3
-Tested up to: 3.3.1
+Tested up to: 3.5
 Stable tag: 1.0
 License: GPLv2 or later
 
@@ -20,6 +20,10 @@ PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Enter and save your Google API key and Google Custom Search Engine ID
 4. You're done, celebrate with a cup of coffee?
+
+== Screenshots ==
+
+1. Settings
 
 == Changelog ==
 
