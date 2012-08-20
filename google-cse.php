@@ -3,7 +3,7 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0
+Version: 1.0.1
 Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later
@@ -41,6 +41,8 @@ if(is_admin()) {
 /**
  * Google API Request
  *
+ * @see wp_remote_get
+ *
  * @param boolean $test
  *
  * @since 1.0
@@ -75,23 +77,13 @@ function gcse_request($test = false)
         }
 
         // Request response
-        if(function_exists('curl_version')) {
-            $ch = curl_init();
-            curl_setopt_array($ch, array(
-                CURLOPT_URL            => $url,
-                CURLOPT_RETURNTRANSFER => (!$test ? 1 : 0)));
-            $response = curl_exec($ch);
-            curl_close($ch);
-        }
-        else {
-            $response = file_get_contents($url);
-        }
+        $response = wp_remote_get($url);
     }
 
     // Save and return new response
-    if(isset($response)) {
-        set_transient('gcse_'.md5($url), $response, 3600);
-        return json_decode($response, true);
+    if(isset($response['body'])) {
+        set_transient('gcse_'.md5($url), $response['body'], 3600);
+        return json_decode($response['body'], true);
     }
     else {
         return array();

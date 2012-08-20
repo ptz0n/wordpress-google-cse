@@ -15,6 +15,11 @@ PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a
 
 Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHub](https://github.com/ptz0n/wordpress-google-cse) or contact me [directly](https://github.com/ptz0n).
 
+## Credits
+
+* [Jonas Nordström](windyjonas)
+* [Andreas Karlsson](indiebytes)
+
 ## Changelog
 
 ### 1.0
