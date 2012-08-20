@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '1.0');
+define('GCSE_VERSION', '1.0.1');
 
 /**
  * Security

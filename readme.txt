@@ -3,7 +3,7 @@ Contributors: ptz0n
 Tags: google, search, ajax, custom search engine, cse
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Google powered search for your WordPress site or blog.
