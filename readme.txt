@@ -1,6 +1,7 @@
 === Google CSE ===
 Contributors: ptz0n
-Tags: google, search, ajax, custom search engine, cse
+Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
+Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: 1.0.2
