@@ -43,20 +43,16 @@ add_action('admin_menu', 'gcse_options_page_link');
  */
 function gcse_options_page()
 {
-    $options = get_option('gcse_options');
+    $options  = get_option('gcse_options');
     $response = gcse_request();
+    $errors   = array(
+        'keyInvalid'          => __('Invalid API key.'),
+        'invalid'             => __('Invalid Custom Search Engine ID.'),
+        'accessNotConfigured' => __('"Custom Search API" service isn\'t enabled in the APIs Console.'));
 
     if($response && isset($response['error'])) {
-        switch($response['error']['errors'][0]['reason']) {
-            case 'keyInvalid':
-                $error = __('Invalid API key');
-                break;
-            case 'invalid':
-                $error = __('Invalid Custom Search Engine ID');
-                break;
-            default:
-                $error = $response['error']['errors'][0]['reason'];
-        }
+        $reason = $response['error']['errors'][0]['reason'];
+        $error  = array_key_exists($reason, $errors) ? $errors[$reason] : $reason;
     }
     ?>
     <div class="wrap">
