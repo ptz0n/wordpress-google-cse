@@ -63,11 +63,12 @@ function gcse_request($test = false)
         $start  = $wp_query->query_vars['paged'] ?
             ($wp_query->query_vars['paged']-1)*$num+1 : 1;
         $params = http_build_query(array(
-            'key'   => trim($options['key']),
-            'cx'    => trim($options['id']),
-            'alt'   => 'json',
-            'num'   => $num,
-            'start' => $start,
+            'key'         => trim($options['key']),
+            'cx'          => trim($options['id']),
+            'alt'         => 'json',
+            'num'         => $num,
+            'start'       => $start,
+            'prettyPrint' => 'false',
             'q'     => get_search_query()));
         $url    = 'https://www.googleapis.com/customsearch/v1?'.$params;
 
