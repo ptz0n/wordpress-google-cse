@@ -3,7 +3,7 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0.1
+Version: 1.0.2
 Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later

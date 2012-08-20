@@ -17,10 +17,14 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 
 ## Credits
 
-* [Jonas Nordström](windyjonas)
-* [Andreas Karlsson](indiebytes)
+* [Jonas Nordström](https://github.com/windyjonas)
+* [Andreas Karlsson](https://github.com/indiebytes)
+* [Tom Ewer](https://twitter.com/tomewer)
 
 ## Changelog
+
+### 1.0.2
+* Added more descriptive error messages to admin
 
 ### 1.0.1
 * Using native WordPress methods for remote requests

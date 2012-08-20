@@ -3,7 +3,7 @@ Contributors: ptz0n
 Tags: google, search, ajax, custom search engine, cse
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 
 Google powered search for your WordPress site or blog.
@@ -17,12 +17,13 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 #### Credits
 
 * [Jonas Nordström](http://profiles.wordpress.org/windyjonas/)
+* [Tom Ewer](http://wordpress.org/support/profile/tomewer)
 
 == Installation ==
 
 1. Place the plugin (`google-cse/` directory) in the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Enter and save your Google API key and Google Custom Search Engine ID
+3. Enter and save your Google API key and Google Custom Search Engine ID.
 4. You're done, celebrate with a cup of coffee?
 
 == Screenshots ==
@@ -30,6 +31,9 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 1. Settings
 
 == Changelog ==
+
+= 1.0.2 =
+* Added more descriptive error messages to admin
 
 = 1.0.1 =
 * Using native WordPress methods for remote requests
