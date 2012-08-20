@@ -22,6 +22,9 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 
 ## Changelog
 
+### 1.0.1
+* Using native WordPress methods for remote requests
+
 ### 1.0
 * Settings
 * Search result cache

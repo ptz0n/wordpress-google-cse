@@ -14,7 +14,7 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 > You'll need an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](http://www.google.com/cse/) to use it.
 
-## Credits
+#### Credits
 
 * [Jonas Nordström](http://profiles.wordpress.org/windyjonas/)
 
