@@ -78,7 +78,10 @@ function gcse_request($test = false)
         }
 
         // Request response
-        $response = wp_remote_get($url);
+        if(is_wp_error($response = wp_remote_get($url))) {
+            return array('error' => array('errors' =>
+                array(array('reason' => $response->get_error_message()))));
+        }
     }
 
     // Save and return new response
