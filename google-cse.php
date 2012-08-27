@@ -58,9 +58,11 @@ function gcse_request($test = false)
         isset($options['id']) && $options['id']) {
 
         // Build URL
-        $num    = $wp_query->query_vars['posts_per_page'] < 11 ?
+        $num    = isset($wp_query->query_vars['posts_per_page']) &&
+            $wp_query->query_vars['posts_per_page'] < 11 ?
             $wp_query->query_vars['posts_per_page'] : 10;
-        $start  = $wp_query->query_vars['paged'] ?
+        $start  = isset($wp_query->query_vars['paged']) &&
+            $wp_query->query_vars['paged'] ?
             ($wp_query->query_vars['paged']-1)*$num+1 : 1;
         $params = http_build_query(array(
             'key'         => trim($options['key']),
@@ -78,7 +80,7 @@ function gcse_request($test = false)
         }
 
         // Request response
-        if(is_wp_error($response = wp_remote_get($url))) {
+        if(is_wp_error($response = wp_remote_get($url, array('sslverify' => false)))) {
             return array('error' => array('errors' =>
                 array(array('reason' => $response->get_error_message()))));
         }
