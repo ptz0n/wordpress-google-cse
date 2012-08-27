@@ -19,6 +19,7 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 * [Jonas Nordström](http://profiles.wordpress.org/windyjonas/)
 * [Tom Ewer](http://wordpress.org/support/profile/tomewer)
+* [Martel7](http://wordpress.org/support/profile/martel7)
 
 == Installation ==
 
@@ -35,6 +36,7 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 = 1.0.2 =
 * Added more descriptive error messages to admin
+* Disabled SSL check for `www.googleapis.com`
 
 = 1.0.1 =
 * Using native WordPress methods for remote requests
