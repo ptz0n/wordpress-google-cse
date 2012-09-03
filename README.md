@@ -4,6 +4,10 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](http://www.google.com/cse/) to use it. DS.
 
+## Dependencies
+
+* WordPress 3.3
+
 ## Installation
 
 1. Place the plugin (`google-cse/` directory) in the `/wp-content/plugins/` directory
