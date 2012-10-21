@@ -54,10 +54,18 @@ function gcse_options_page()
         $reason = $response['error']['errors'][0]['reason'];
         $error  = array_key_exists($reason, $errors) ? $errors[$reason] : $reason;
     }
+
+    preg_match('/^[0-9]+\.?[0-9]+/', get_bloginfo('version'), $versionCheck);
     ?>
     <div class="wrap">
         <div id="icon-options-general" class="icon32"></div>
         <h2><?php _e('Google Custom Search Engine Settings'); ?></h2>
+
+        <?php if($versionCheck && $versionCheck[0] < 3.3) : ?>
+            <div class="error below-h2">
+                <p><strong><?php _e('ERROR'); ?></strong>: <?php _e('You are running a to old version of WordPress. This plugin requires at least 3.3.'); ?>
+            </div>
+        <?php endif; ?>
 
         <?php if($error) : ?>
             <div class="error below-h2">
