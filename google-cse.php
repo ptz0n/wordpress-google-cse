@@ -181,7 +181,7 @@ function gcse_url_to_postid($url)
  */
 function gcse_permalink($the_permalink)
 {
-    if(is_main_query() && $the_permalink == '') {
+    if(function_exists('is_main_query') && is_main_query() && $the_permalink == '') {
         global $post;
         return $post->guid;
     }
