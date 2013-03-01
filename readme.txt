@@ -25,7 +25,7 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 1. Place the plugin (`google-cse/` directory) in the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Enter and save your Google API key and Google Custom Search Engine ID (http://www.google.com/cse/manage/all).
+3. Enter and save your Google API key and Google Custom Search Engine ID.
 4. You're done, celebrate with a cup of coffee?
 
 == Screenshots ==
