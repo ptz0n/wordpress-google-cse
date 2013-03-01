@@ -28,6 +28,10 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 
 ## Changelog
 
+### 1.0.3
+* Added in featured images (use $post->cse_img for image url)
+* Fixed pagination bug
+
 ### 1.0.2
 * Added more descriptive error messages to admin
 * Disabled SSL check for `www.googleapis.com`.
