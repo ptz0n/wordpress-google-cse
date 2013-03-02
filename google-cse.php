@@ -3,8 +3,8 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0.2
-Author: Erik Eng
+Version: 1.1
+Author: Erik Eng, Mike Garrett (Web Development Group)
 Author URI: http://erikeng.se/
 License: GPLv2 or later
 */
@@ -102,39 +102,46 @@ function gcse_request($test = false)
  * @since 1.0
  *
  */
-function gcse_results()
+function gcse_results($posts)
 {
     if(is_search()) {
-        global $posts, $wp_query;
+        global $wp_query;
         $response = gcse_request();
 
         if(isset($response['items']) && $response['items']) {
 
             $results = array();
+			
             foreach($response['items'] as $result) {
                 if($id = gcse_url_to_postid($result['link'])) {
                     $post = get_post($id);
                 }
                 else {
+                	// Adding in the featured image. You can use it if you'd like.					
+					$pagemapImgAtt = $result['pagemap']['cse_image']['0'];
+					
                     $post = (object)array(
                         'post_title'   => $result['title'],
                         'post_excerpt' => $result['snippet'],
                         'post_content' => $result['htmlSnippet'],
                         'guid'         => $result['link'],
                         'post_type'    => 'search',
-                        'ID'           => 0
+                        'ID'           => 0,
+						'cse_img'     => $pagemapImgAtt['src']	
                     );
+			
                 }
                 $results[] = $post;
-            }
 
-            // TODO: Update $posts with new data
+            }
 
             // Set results as posts
             $posts = $results;
 
             // Update post count
             $wp_query->post_count = count($posts);
+
+            $wp_query->found_posts = $response['searchInformation']['totalResults'];
 
             // Pagination
             $posts_per_page = $wp_query->query_vars['posts_per_page'] < 11 ?
@@ -147,8 +154,10 @@ function gcse_results()
             add_filter('the_permalink', 'gcse_permalink');
         }
     }
+    return $posts;
 }
-add_action('wp_head', 'gcse_results');
+//add_action('wp_head', 'gcse_results'); // Old Method didn't modify query results in the right place
+add_filter('posts_results', 'gcse_results'); // Modifies results directly after query is made 
 
 /**
  * URL to Post ID
