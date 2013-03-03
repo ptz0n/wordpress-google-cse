@@ -1,5 +1,5 @@
 === Google CSE ===
-Contributors: ptz0n, MikeNGarrett
+Contributors: ptz0n, windyjonas, MikeNGarrett
 Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
 Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
@@ -17,9 +17,10 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 #### Credits
 
-* [Jonas Nordström](http://profiles.wordpress.org/windyjonas/)
+* [Jonas Nordström](http://wordpress.org/support/profile/windyjonas)
 * [Tom Ewer](http://wordpress.org/support/profile/tomewer)
 * [Martel7](http://wordpress.org/support/profile/martel7)
+* [Mike Garrett](http://wordpress.org/support/profile/mikengarrett)
 
 == Installation ==
 
@@ -28,14 +29,16 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 3. Enter and save your Google API key and Google Custom Search Engine ID.
 4. You're done, celebrate with a cup of coffee?
 
+If you want to use images from the Google result in your search result (`search.php`) use `$post->cse_img` for image URL.
+
 == Screenshots ==
 
 1. Settings
 
 == Changelog ==
 
-= 1.0.3 = 
-* Added in featured images (use $post->cse_img for image url)
+= 1.0.3 =
+* Added in featured images from Google results (use $post->cse_img for image URL)
 * Fixed pagination bug
 
 = 1.0.2 =

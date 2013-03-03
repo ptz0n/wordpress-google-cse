@@ -3,8 +3,8 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.1
-Author: Erik Eng, Mike Garrett (Web Development Group)
+Version: 1.0.3
+Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later
 */
@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '1.0.2');
+define('GCSE_VERSION', '1.0.3');
 
 /**
  * Security
@@ -111,15 +111,15 @@ function gcse_results($posts)
         if(isset($response['items']) && $response['items']) {
 
             $results = array();
-			
+
             foreach($response['items'] as $result) {
                 if($id = gcse_url_to_postid($result['link'])) {
                     $post = get_post($id);
                 }
                 else {
-                	// Adding in the featured image. You can use it if you'd like.					
+                	// Adding in the featured image. You can use it if you'd like.
 					$pagemapImgAtt = $result['pagemap']['cse_image']['0'];
-					
+
                     $post = (object)array(
                         'post_title'   => $result['title'],
                         'post_excerpt' => $result['snippet'],
@@ -127,9 +127,9 @@ function gcse_results($posts)
                         'guid'         => $result['link'],
                         'post_type'    => 'search',
                         'ID'           => 0,
-						'cse_img'     => $pagemapImgAtt['src']	
+						'cse_img'     => $pagemapImgAtt['src']
                     );
-			
+
                 }
                 $results[] = $post;
 
@@ -156,8 +156,8 @@ function gcse_results($posts)
     }
     return $posts;
 }
-//add_action('wp_head', 'gcse_results'); // Old Method didn't modify query results in the right place
-add_filter('posts_results', 'gcse_results'); // Modifies results directly after query is made 
+
+add_filter('posts_results', 'gcse_results'); // Modifies results directly after query is made
 
 /**
  * URL to Post ID
