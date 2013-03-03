@@ -19,7 +19,7 @@ If you want to use images from the Google result in your search result (`search.
 
 ## Feedback and questions
 
-Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHub](https://github.com/ptz0n/wordpress-google-cse) or contact me [directly](https://github.com/ptz0n).
+Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHub](https://github.com/ptz0n/wordpress-google-cse/issues) or contact me [directly](https://github.com/ptz0n).
 
 ## Credits
 
@@ -68,7 +68,7 @@ If you are submitting features that have more than one changeset, please create 
 
 You can now see these changes online at a url like:
 
-`http://github.com/your_user_name/wordpress-google-cse/commits/new_branch_name`
+`http://github.com/your_user_name/wordpress-google-cse/commits/new_branch_name
 
 If you have single-commit patches, it is fine to keep them on master. But do keep in mind that these changesets might be cherry-picked.
 
