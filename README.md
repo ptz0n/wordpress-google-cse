@@ -68,7 +68,7 @@ If you are submitting features that have more than one changeset, please create 
 
 You can now see these changes online at a url like:
 
-`http://github.com/your_user_name/wordpress-google-cse/commits/new_branch_name
+`http://github.com/your_user_name/wordpress-google-cse/commits/new_branch_name`
 
 If you have single-commit patches, it is fine to keep them on master. But do keep in mind that these changesets might be cherry-picked.
 
