@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '1.0.2');
+define('GCSE_VERSION', '1.0.3');
 
 /**
  * Security
@@ -109,11 +109,13 @@ function gcse_results($posts, $q) {
         if(isset($response['items']) && $response['items']) {
 
             $results = array();
+
             foreach($response['items'] as $result) {
                 if($id = gcse_url_to_postid($result['link'])) {
                     $post = get_post($id);
                 }
                 else {
+
                     $post = (object)array(
                         'post_title'   => $result['title'],
                         'post_author'  => '',

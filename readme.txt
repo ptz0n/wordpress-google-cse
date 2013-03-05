@@ -15,12 +15,14 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 
 > You'll need an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](http://www.google.com/cse/) to use it.
 
+Check out the [GitHub repo](https://github.com/ptz0n/wordpress-google-cse) for the latest development on this plugin.
+
 #### Credits
 
-* [Jonas Nordström](http://profiles.wordpress.org/windyjonas/)
+* [Jonas Nordström](http://wordpress.org/support/profile/windyjonas)
 * [Tom Ewer](http://wordpress.org/support/profile/tomewer)
 * [Martel7](http://wordpress.org/support/profile/martel7)
-* [MikeNGarrett](https://github.com/mikengarrett)
+* [Mike Garrett](http://wordpress.org/support/profile/mikengarrett)
 
 == Installation ==
 
@@ -28,6 +30,8 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Enter and save your Google API key and Google Custom Search Engine ID.
 4. You're done, celebrate with a cup of coffee?
+
+If you want to use images from the Google result in your search result (`search.php`) use `$post->cse_img` for image URL.
 
 == Screenshots ==
 
@@ -40,8 +44,8 @@ This is not another iframe embed or AJAX result listing plugin. Instead search r
 * Fixed post variables WordPress was looking for.
 * Fixed images returned by search results playing nicely.
 
-= 1.0.3 = 
-* Added in featured images (use $post->cse_img for image url)
+= 1.0.3 =
+* Added in featured images from Google results (use $post->cse_img for image URL)
 * Fixed pagination bug
 
 = 1.0.2 =
