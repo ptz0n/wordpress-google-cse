@@ -1,10 +1,10 @@
 === Google CSE ===
-Contributors: ptz0n, windyjonas, MikeNGarrett
+Contributors: ptz0n
 Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
 Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 
 Google powered search for your WordPress site or blog.
@@ -38,6 +38,11 @@ If you want to use images from the Google result in your search result (`search.
 1. Settings
 
 == Changelog ==
+
+= 1.0.4 =
+* Fixed memory leak caused by the query used to fetch posts by url.
+* Fixed post variables WordPress was looking for.
+* Fixed images returned by search results playing nicely.
 
 = 1.0.3 =
 * Added in featured images from Google results (use $post->cse_img for image URL)
