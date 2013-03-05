@@ -25,8 +25,13 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 * [Andreas Karlsson](https://github.com/indiebytes)
 * [Tom Ewer](https://twitter.com/tomewer)
 * [Martel7](http://wordpress.org/support/profile/martel7)
+* [MikeNGarrett](https://github.com/mikengarrett)
 
 ## Changelog
+### 1.0.4 
+* Fixed memory leak caused by the query used to fetch posts by url.
+* Fixed post variables WordPress was looking for.
+* Fixed images returned by search results playing nicely.
 
 ### 1.0.3
 * Added in featured images (use $post->cse_img for image url)
