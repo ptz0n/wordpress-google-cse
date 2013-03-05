@@ -3,7 +3,7 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0.3
+Version: 1.0.4
 Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later
@@ -102,12 +102,10 @@ function gcse_request($test = false)
  * @since 1.0
  *
  */
-function gcse_results($posts)
-{
-    if(is_search()) {
+function gcse_results($posts, $q) {
+    if($q->is_single == 1 && $q->is_single != 1) {
         global $wp_query;
         $response = gcse_request();
-
         if(isset($response['items']) && $response['items']) {
 
             $results = array();
@@ -117,27 +115,31 @@ function gcse_results($posts)
                     $post = get_post($id);
                 }
                 else {
-                	// Adding in the featured image. You can use it if you'd like.
-					$pagemapImgAtt = $result['pagemap']['cse_image']['0'];
 
                     $post = (object)array(
                         'post_title'   => $result['title'],
+                        'post_author'  => '',
+                        'post_date'    => '', 
+                        'post_status'  => 'published',
                         'post_excerpt' => $result['snippet'],
                         'post_content' => $result['htmlSnippet'],
                         'guid'         => $result['link'],
                         'post_type'    => 'search',
                         'ID'           => 0,
-						'cse_img'     => $pagemapImgAtt['src']
                     );
-
+                	// Adding in the featured image. You can use it if you'd like.	
+					if(isset($result['pagemap']) && isset($result['pagemap']['cse_image']['0'])) { 
+						$post->cse_img = $result['pagemap']['cse_image'][0]['src'];
+					}
+			
                 }
                 $results[] = $post;
 
             }
-
+            $post = '';
             // Set results as posts
             $posts = $results;
-
+            $results = '';
             // Update post count
             $wp_query->post_count = count($posts);
 
@@ -156,8 +158,8 @@ function gcse_results($posts)
     }
     return $posts;
 }
-
-add_filter('posts_results', 'gcse_results'); // Modifies results directly after query is made
+//add_action('wp_head', 'gcse_results'); // Old Method didn't modify query results in the right place
+add_filter('posts_results', 'gcse_results', 99, 2); // Modifies results directly after query is made 
 
 /**
  * URL to Post ID
