@@ -103,7 +103,7 @@ function gcse_request($test = false)
  *
  */
 function gcse_results($posts, $q) {
-    if($q->is_single == 1 && $q->is_single != 1) {
+    if($q->is_single != 1 && $q->is_search == 1) {
         global $wp_query;
         $response = gcse_request();
         if(isset($response['items']) && $response['items']) {
@@ -115,22 +115,55 @@ function gcse_results($posts, $q) {
                     $post = get_post($id);
                 }
                 else {
-
-                    $post = (object)array(
-                        'post_title'   => $result['title'],
-                        'post_author'  => '',
-                        'post_date'    => '', 
-                        'post_status'  => 'published',
-                        'post_excerpt' => $result['snippet'],
-                        'post_content' => $result['htmlSnippet'],
-                        'guid'         => $result['link'],
-                        'post_type'    => 'search',
-                        'ID'           => 0,
-                    );
+	        	$mime = false;
+	        	if(!empty($result['mime'])) {
+	                	switch($result['mime']) {
+		                	case "application/pdf": 
+		                		$mime = "PDF";
+		                	break;
+		                	case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+		                	case "application/vnd.openxmlformats-officedocument.presentationml.template":
+		                	case "application/vnd.openxmlformats-officedocument.presentationml.slideshow":
+		                	case "application/vnd.ms-powerpoint.addin.macroEnabled.12":
+		                	case "application/vnd.ms-powerpoint.presentation.macroEnabled.12":
+		                	case "application/vnd.ms-powerpoint.template.macroEnabled.12":
+		                	case "application/vnd.ms-powerpoint.slideshow.macroEnabled.12":
+		                	case "application/vnd.ms-powerpoint":
+		                		$mime = "PPT";
+		                	break;
+		                	case "application/msword":
+		                	case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+		                	case "application/vnd.openxmlformats-officedocument.wordprocessingml.template":
+		                	case "application/vnd.ms-word.document.macroEnabled.12":
+		                	case "application/vnd.ms-word.template.macroEnabled.12":
+		                		$mime = "DOC";
+		                	break;
+		                	case "application/vnd.ms-excel":
+		                	case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+		                	case "application/vnd.openxmlformats-officedocument.spreadsheetml.template":
+		                	case "application/vnd.ms-excel.sheet.macroEnabled.12":
+		                	case "application/vnd.ms-excel.template.macroEnabled.12":
+		                	case "application/vnd.ms-excel.addin.macroEnabled.12":
+		                	case "application/vnd.ms-excel.sheet.binary.macroEnabled.12":
+		                		$mime = "XLS";
+	                	}
+	        	}
+	                    $post = (object)array(
+	                        'post_title'   => $result['title'],
+	                        'post_author'  => '',
+	                        'post_date'    => '', 
+	                        'post_status'  => 'published',
+	                        'post_excerpt' => $result['snippet'],
+	                        'post_content' => $result['htmlSnippet'],
+	                        'guid'         => $result['link'],
+	                        'post_type'    => 'search',
+	                        'ID'           => 0,
+	                        'mime'		   => $mime,
+	                    );
                 	// Adding in the featured image. You can use it if you'd like.	
-					if(isset($result['pagemap']) && isset($result['pagemap']['cse_image']['0'])) { 
-						$post->cse_img = $result['pagemap']['cse_image'][0]['src'];
-					}
+				if(isset($result['pagemap']) && isset($result['pagemap']['cse_image']['0'])) { 
+					$post->cse_img = $result['pagemap']['cse_image'][0]['src'];
+				}
 			
                 }
                 $results[] = $post;
