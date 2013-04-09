@@ -103,7 +103,7 @@ function gcse_request($test = false)
  *
  */
 function gcse_results($posts, $q) {
-    if($q->is_single != 1 && $q->is_search == 1) {
+    if($q->is_single != 1 && $q->is_search == 1 && $q->is_admin != 1) {
         global $wp_query;
         $response = gcse_request();
         if(isset($response['items']) && $response['items']) {
