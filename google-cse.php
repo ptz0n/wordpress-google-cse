@@ -109,9 +109,9 @@ function gcse_results($posts, $q) {
         if(isset($response['items']) && $response['items']) {
 
             $results = array();
-
+            $options = get_option('gcse_options');
             foreach($response['items'] as $result) {
-                if($id = gcse_url_to_postid($result['link'])) {
+                if(!isset($options['match']) && $id = gcse_url_to_postid($result['link'])) {
                     $post = get_post($id);
                 }
                 else {
