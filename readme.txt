@@ -35,7 +35,8 @@ If you want to use images from the Google result in your search result (`search.
 
 == Screenshots ==
 
-1. Settings
+1. Search Results
+2. Settings
 
 == Changelog ==
 
