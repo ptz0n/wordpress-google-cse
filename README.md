@@ -30,7 +30,12 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 * [Mike Garrett](https://github.com/MikeNGarrett)
 
 ## Changelog
-### 1.0.4 
+
+### 1.0.5
+* Added `Settings` link to Plugins index
+* Added option for disabling post matching
+
+### 1.0.4
 * Fixed memory leak caused by the query used to fetch posts by url.
 * Fixed post variables WordPress was looking for.
 * Fixed images returned by search results playing nicely.

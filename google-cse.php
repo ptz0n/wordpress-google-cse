@@ -3,7 +3,7 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0.4
+Version: 1.0.5
 Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later
@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '1.0.3');
+define('GCSE_VERSION', '1.0.5');
 
 /**
  * Security
@@ -115,60 +115,61 @@ function gcse_results($posts, $q) {
                     $post = get_post($id);
                 }
                 else {
-	        	$mime = false;
-	        	if(!empty($result['mime'])) {
-	                	switch($result['mime']) {
-		                	case "application/pdf": 
-		                		$mime = "PDF";
-		                	break;
-		                	case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-		                	case "application/vnd.openxmlformats-officedocument.presentationml.template":
-		                	case "application/vnd.openxmlformats-officedocument.presentationml.slideshow":
-		                	case "application/vnd.ms-powerpoint.addin.macroEnabled.12":
-		                	case "application/vnd.ms-powerpoint.presentation.macroEnabled.12":
-		                	case "application/vnd.ms-powerpoint.template.macroEnabled.12":
-		                	case "application/vnd.ms-powerpoint.slideshow.macroEnabled.12":
-		                	case "application/vnd.ms-powerpoint":
-		                		$mime = "PPT";
-		                	break;
-		                	case "application/msword":
-		                	case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-		                	case "application/vnd.openxmlformats-officedocument.wordprocessingml.template":
-		                	case "application/vnd.ms-word.document.macroEnabled.12":
-		                	case "application/vnd.ms-word.template.macroEnabled.12":
-		                		$mime = "DOC";
-		                	break;
-		                	case "application/vnd.ms-excel":
-		                	case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-		                	case "application/vnd.openxmlformats-officedocument.spreadsheetml.template":
-		                	case "application/vnd.ms-excel.sheet.macroEnabled.12":
-		                	case "application/vnd.ms-excel.template.macroEnabled.12":
-		                	case "application/vnd.ms-excel.addin.macroEnabled.12":
-		                	case "application/vnd.ms-excel.sheet.binary.macroEnabled.12":
-		                		$mime = "XLS";
-	                	}
-	        	}
-	                    $post = (object)array(
-	                        'post_title'   => $result['title'],
-	                        'post_author'  => '',
-	                        'post_date'    => '', 
-	                        'post_status'  => 'published',
-	                        'post_excerpt' => $result['snippet'],
-	                        'post_content' => $result['htmlSnippet'],
-	                        'guid'         => $result['link'],
-	                        'post_type'    => 'search',
-	                        'ID'           => 0,
-	                        'mime'		   => $mime,
-	                    );
-                	// Adding in the featured image. You can use it if you'd like.	
-				if(isset($result['pagemap']) && isset($result['pagemap']['cse_image']['0'])) { 
-					$post->cse_img = $result['pagemap']['cse_image'][0]['src'];
-				}
-			
+                    $mime = false;
+                    if(!empty($result['mime'])) {
+                        switch($result['mime']) {
+                            case "application/pdf":
+                                $mime = "PDF";
+                                break;
+                            case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+                            case "application/vnd.openxmlformats-officedocument.presentationml.template":
+                            case "application/vnd.openxmlformats-officedocument.presentationml.slideshow":
+                            case "application/vnd.ms-powerpoint.addin.macroEnabled.12":
+                            case "application/vnd.ms-powerpoint.presentation.macroEnabled.12":
+                            case "application/vnd.ms-powerpoint.template.macroEnabled.12":
+                            case "application/vnd.ms-powerpoint.slideshow.macroEnabled.12":
+                            case "application/vnd.ms-powerpoint":
+                                $mime = "PPT";
+                                break;
+                            case "application/msword":
+                            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                            case "application/vnd.openxmlformats-officedocument.wordprocessingml.template":
+                            case "application/vnd.ms-word.document.macroEnabled.12":
+                            case "application/vnd.ms-word.template.macroEnabled.12":
+                                $mime = "DOC";
+                                break;
+                            case "application/vnd.ms-excel":
+                            case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                            case "application/vnd.openxmlformats-officedocument.spreadsheetml.template":
+                            case "application/vnd.ms-excel.sheet.macroEnabled.12":
+                            case "application/vnd.ms-excel.template.macroEnabled.12":
+                            case "application/vnd.ms-excel.addin.macroEnabled.12":
+                            case "application/vnd.ms-excel.sheet.binary.macroEnabled.12":
+                                $mime = "XLS";
+                                break;
+                        }
+                    }
+                    $post = (object)array(
+                        'post_title'   => $result['title'],
+                        'post_author'  => '',
+                        'post_date'    => '',
+                        'post_status'  => 'published',
+                        'post_excerpt' => $result['snippet'],
+                        'post_content' => $result['htmlSnippet'],
+                        'guid'         => $result['link'],
+                        'post_type'    => 'search',
+                        'ID'           => 0,
+                        'mime'		   => $mime,
+                    );
+
+                	// Adding in the featured image. You can use it if you'd like.
+                    if(isset($result['pagemap']) && isset($result['pagemap']['cse_image']['0'])) {
+                        $post->cse_img = $result['pagemap']['cse_image'][0]['src'];
+                    }
                 }
                 $results[] = $post;
-
             }
+
             $post = '';
             // Set results as posts
             $posts = $results;
@@ -191,8 +192,7 @@ function gcse_results($posts, $q) {
     }
     return $posts;
 }
-//add_action('wp_head', 'gcse_results'); // Old Method didn't modify query results in the right place
-add_filter('posts_results', 'gcse_results', 99, 2); // Modifies results directly after query is made 
+add_filter('posts_results', 'gcse_results', 99, 2); // Modifies results directly after query is made
 
 /**
  * URL to Post ID

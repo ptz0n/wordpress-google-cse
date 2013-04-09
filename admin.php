@@ -35,6 +35,22 @@ function gcse_options_page_link()
 add_action('admin_menu', 'gcse_options_page_link');
 
 /**
+ * Add Settings Link to Plugins index
+ *
+ * @since 1.0.5
+ *
+ * @return array
+ */
+function gcse_settings_link($links) {
+  $settings_link = '<a href="options-general.php?page=google-cse-options">Settings</a>';
+  array_unshift($links, $settings_link);
+  return $links;
+}
+$gcsePluginPath = explode('/', plugin_basename(__FILE__));
+$gcsePluginDir  = $gcsePluginPath[count($gcsePluginPath)-2];
+add_filter('plugin_action_links_'.$gcsePluginDir.'/google-cse.php', 'gcse_settings_link');
+
+/**
  * Options page
  *
  * @since 1.0
@@ -67,7 +83,7 @@ function gcse_options_page()
             </div>
         <?php endif; ?>
 
-        <?php if($error) : ?>
+        <?php if(isset($error) && $error) : ?>
             <div class="error below-h2">
                 <p><strong><?php _e('ERROR'); ?></strong>: <?php echo $error; ?></p>
             </div>
@@ -90,6 +106,13 @@ function gcse_options_page()
                         <td>
                             <input type="text" size="50" id="gcse_options[id]" name="gcse_options[id]" value="<?php echo isset($options['id']) ? $options['id'] : ''; ?>" />
                             <span class="description">Search engine ID (CX)<br />Visit <a href="http://www.google.com/cse/">Google Custom Search Engine</a> to create or manage your existing search engines.</span>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row"><label for="gcse_options[match]">Disable matching</label></th>
+                        <td>
+                            <input type="checkbox" value="1" id="gcse_options[match]" name="gcse_options[match]"<?php echo isset($options['match']) ? ' checked="checked"' : ''; ?> />
+                            <span class="description">Each item in the search result will <strong>not</strong> try to match with content on this site. If a match is found, the title, excerpt etc. will be displayed from WordPress (not Google) for that post.</span>
                         </td>
                     </tr>
                 </table>
