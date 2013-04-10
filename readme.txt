@@ -4,7 +4,7 @@ Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
 Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 
 Google powered search for your WordPress site or blog.
@@ -28,7 +28,7 @@ Check out the [GitHub repo](https://github.com/ptz0n/wordpress-google-cse) for t
 
 1. Place the plugin (`google-cse/` directory) in the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Enter and save your Google API key and Google Custom Search Engine ID.
+3. Enter and save your [Google API](https://code.google.com/apis/console/) key and [Google Custom Search Engine](https://www.google.com/cse/) ID.
 4. You're done, celebrate with a cup of coffee?
 
 If you want to use images from the Google result in your search result (`search.php`) use `$post->cse_img` for image URL.
@@ -39,6 +39,9 @@ If you want to use images from the Google result in your search result (`search.
 2. Settings
 
 == Changelog ==
+
+= 1.0.6 =
+* Excluded admin from search hook
 
 = 1.0.5 =
 * Added `Settings` link to Plugins index
