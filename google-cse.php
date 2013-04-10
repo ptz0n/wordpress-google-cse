@@ -150,16 +150,17 @@ function gcse_results($posts, $q) {
                         }
                     }
                     $post = (object)array(
-                        'post_title'   => $result['title'],
-                        'post_author'  => '',
-                        'post_date'    => '',
-                        'post_status'  => 'published',
-                        'post_excerpt' => $result['snippet'],
-                        'post_content' => $result['htmlSnippet'],
-                        'guid'         => $result['link'],
-                        'post_type'    => 'search',
-                        'ID'           => 0,
-                        'mime'		   => $mime,
+                        'post_title'     => $result['title'],
+                        'post_author'    => '',
+                        'post_date'      => '',
+                        'post_status'    => 'published',
+                        'post_excerpt'   => $result['snippet'],
+                        'post_content'   => $result['htmlSnippet'],
+                        'guid'           => $result['link'],
+                        'post_type'      => 'search',
+                        'ID'             => 0,
+                        'comment_status' => 'closed',
+                        'mime'           => $mime,
                     );
 
                 	// Adding in the featured image. You can use it if you'd like.
