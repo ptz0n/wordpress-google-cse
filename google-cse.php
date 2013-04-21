@@ -150,6 +150,7 @@ function gcse_results($posts, $q) {
                         }
                     }
                     $post = (object)array(
+                        'post_type'      => 'page',
                         'post_title'     => $result['title'],
                         'post_author'    => '',
                         'post_date'      => '',
