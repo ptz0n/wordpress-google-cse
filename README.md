@@ -8,6 +8,12 @@ PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a
 
 * WordPress 3.3
 
+## Features
+
+* Search results sorting by relevance
+* Works with all post types
+* Multisite &amp; network support
+
 ## Installation
 
 1. Place the plugin (`google-cse/` directory) in the `/wp-content/plugins/` directory
