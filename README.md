@@ -2,7 +2,7 @@
 
 This is not another iframe embed or AJAX result listing plugin. Instead search results from your Google Custom Search Engine is served via WordPress search listing. No need to customize your theme or search box.
 
-PS: You'll need an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](https://www.google.com/cse/) to use it. DS.
+__You'll need to get an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](https://www.google.com/cse/) for it to work.__
 
 ## Dependencies
 
