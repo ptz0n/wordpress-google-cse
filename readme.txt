@@ -4,7 +4,7 @@ Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
 Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 
 Google powered search for your WordPress site or blog.
@@ -46,6 +46,9 @@ If you want to use images from the Google result in your search result (`search.
 
 == Changelog ==
 
+= 1.0.7 =
+* Added support for Phrase Search.
+
 = 1.0.6 =
 * Excluded admin from search hook
 
@@ -72,3 +75,7 @@ If you want to use images from the Google result in your search result (`search.
 = 1.0 =
 * Settings
 * Search result cache
+
+== Roadmap ==
+
+* Support for [filtering and sorting](https://developers.google.com/custom-search/docs/structured_search)

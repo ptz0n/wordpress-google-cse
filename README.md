@@ -35,7 +35,12 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 * [Martel7](http://wordpress.org/support/profile/martel7)
 * [Mike Garrett](https://github.com/MikeNGarrett)
 
+
+
 ## Changelog
+
+### 1.0.7
+* Added support for Phrase Search.
 
 ### 1.0.6
 * Excluded admin from search hook
@@ -63,3 +68,7 @@ Found a bug or missing a feature? Don't hesitate to create a new issue on [GitHu
 ### 1.0
 * Settings
 * Search result cache
+
+## Roadmap
+
+* Support for [filtering and sorting](https://developers.google.com/custom-search/docs/structured_search)

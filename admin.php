@@ -125,3 +125,19 @@ function gcse_options_page()
     </div>
     <?php
 }
+
+/**
+ * Add Support & Review links to Plugins index
+ *
+ * @since 1.0.7
+ *
+ * @return array
+ */
+function gcse_plugin_row_meta($links, $file) {
+    if(stripos($file, 'google-cse.php')) {
+        $links[] = '<a href="http://wordpress.org/support/plugin/google-cse">' . __('Support') . '</a>';
+        $links[] = '<a href="http://wordpress.org/support/view/plugin-reviews/google-cse#postform">' . __('Review this plugin') . '</a>';
+    }
+    return $links;
+}
+add_filter('plugin_row_meta', 'gcse_plugin_row_meta', 10, 2);
