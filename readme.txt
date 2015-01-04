@@ -1,6 +1,6 @@
 === Google CSE ===
 Contributors: ptz0n
-Donate link: https://flattr.com/thing/849734/WordPress-Google-CSE-Plugin
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PE92PZCYJSS9S
 Tags: google, search, custom search engine, cse, custom search
 Requires at least: 3.3
 Tested up to: 3.5
