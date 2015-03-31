@@ -1,4 +1,4 @@
-# WordPress Google CSE
+# WordPress Google CSE Fork to add Daily Limit Exceeded Error issue
 
 This is not another iframe embed or AJAX result listing plugin. Instead search results from your Google Custom Search Engine is served via WordPress search listing. No need to customize your theme or search box.
 
