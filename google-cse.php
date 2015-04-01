@@ -2,10 +2,10 @@
 /*
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
-Description: Google powered search for your WordPress site or blog.
-Version: 1.0.7
-Author: Erik Eng
-Author URI: http://erikeng.se/
+Description: Google powered search for your WordPress site or blog with proper handling of the daily limit exceeded error.
+Version: 1.0.8
+Author: Tim Heath
+Author URI: https://github.com/wheath
 License: GPLv2 or later
 */
 
@@ -14,7 +14,7 @@ License: GPLv2 or later
  *
  * @constant string GCSE_VERSION Plugin version
  */
-define('GCSE_VERSION', '1.0.6');
+define('GCSE_VERSION', '1.0.8');
 
 /**
  * Security
@@ -51,6 +51,16 @@ if(is_admin()) {
  */
 function gcse_request($test = false)
 {
+    if ($test == 'Daily Limit Exceeded') {
+	$response = array();
+	$api_error = array();
+	$api_error['code'] = 403;
+	$api_error['message'] = 'Daily Limit Exceeded';
+	
+	$response['error'] = $api_error;
+	return $response;
+    }
+
     global $wp_query;
     $options = get_option('gcse_options');
     $q       = html_entity_decode(get_search_query());
@@ -191,6 +201,23 @@ function gcse_results($posts, $q) {
 
             // Apply filters
             add_filter('the_permalink', 'gcse_permalink');
+        } else if(isset($response['error']) && $response['error']) {
+            $api_error = $response['error'];
+            if($api_error['code'] == 403 && 
+               $api_error['message'] == 'Daily Limit Exceeded') {
+               $email_subject = 'GCSE JSON API Daily Limit Exceeded';
+               $email_headers = 'From: ' . get_bloginfo('admin_email') . "\r\n";
+
+               $options = get_option('gcse_options');
+
+               $email_message = $email_subject . ' on ' . date("m/d/Y h:i:s A", time()) . "\n" .
+               'Google Developer Application Key: ' .  $options['key'] . "\n" . 
+               'Google Search Engine ID: ' .  $options['id'] . "\n" . 
+               'Site URL: ' . get_bloginfo('url');
+              
+               wp_mail(get_bloginfo('admin_email'), $email_subject, 
+                       $email_message, $email_headers);
+            }
         }
     }
     return $posts;

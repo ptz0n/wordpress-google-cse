@@ -1,4 +1,19 @@
-# WordPress Google CSE
+# WordPress Google CSE Fork to handle Daily Limit Exceeded Error issue
+
+The original project does not handle the Daily Limit Exceeded Error.  Using the gcse json api it is possible to exceed the daily limit of search queries which is 100 by default.  You can read more about that here:
+
+https://developers.google.com/custom-search/json-api/v1/overview
+
+The actual json that is returned when the daily limit of search queries are exceeded can be found here:
+
+https://dazdaztech.wordpress.com/2013/08/03/using-google-custom-search-api-from-the-command-line/
+
+An example email that is produced is:
+
+GCSE JSON API Daily Limit Exceeded on 04/01/2015 01:14:16 AM
+Google Developer Application Key: 1234
+Google Search Engine ID: 1234
+Site URL: http://www.nyb.net
 
 This is not another iframe embed or AJAX result listing plugin. Instead search results from your Google Custom Search Engine is served via WordPress search listing. No need to customize your theme or search box.
 
