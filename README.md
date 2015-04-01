@@ -8,6 +8,13 @@ The actual json that is returned when the daily limit of search queries are exce
 
 https://dazdaztech.wordpress.com/2013/08/03/using-google-custom-search-api-from-the-command-line/
 
+An example email that is produced is:
+
+GCSE JSON API Daily Limit Exceeded on 04/01/2015 01:14:16 AM
+Google Developer Application Key: 1234
+Google Search Engine ID: 1234
+Site URL: http://www.nyb.net
+
 This is not another iframe embed or AJAX result listing plugin. Instead search results from your Google Custom Search Engine is served via WordPress search listing. No need to customize your theme or search box.
 
 __You'll need to get an [Google API key](https://code.google.com/apis/console/) and a [Google Custom Search Engine ID](https://www.google.com/cse/) for it to work.__
