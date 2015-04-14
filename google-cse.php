@@ -3,7 +3,7 @@
 Plugin Name: Google CSE
 Plugin URI: http://wordpress.org/extend/plugins/google-cse/
 Description: Google powered search for your WordPress site or blog.
-Version: 1.0.7
+Version: 1.0.8
 Author: Erik Eng
 Author URI: http://erikeng.se/
 License: GPLv2 or later
@@ -197,7 +197,9 @@ function gcse_results($posts, $q) {
 }
 if(!is_admin()) {
     // Modifies results directly after query is made
+    add_filter('posts_request', 'gcse_set_dummy_sql', 10, 2);
     add_filter('posts_results', 'gcse_results', 99, 2);
+    add_filter('posts_results', 'gcse_fallback', 100, 2);
 }
 
 /**
@@ -238,4 +240,51 @@ function gcse_permalink($the_permalink)
     else {
         return $the_permalink;
     }
+}
+
+/**
+ * Set Dummy SQL
+ * 
+ * Set the sql to SELECT TRUE to avoid a heavy sql query from the database that we won't use (we will get the results from Google Search)
+ *
+ * @since 1.0.8
+ *
+ * @param string $sql, $q
+ *
+ * @return string
+ *
+ */
+function gcse_set_dummy_sql($sql, $q)
+{
+    if($q->is_single !== true && $q->is_search === true) {
+        return "SELECT TRUE";
+    }
+    remove_filter('posts_request','set_dummy_sql',10);
+    return $sql;
+}
+
+/**
+ * Fallback
+ *
+ * After the Google Custom Search returns the results, we check if they are from a SELECT TRUE query.
+ * If that is the case, it means the request to GCSE failed, so we have to get the results from our own database.
+ *
+ * @since 1.0.8
+ *
+ * @param array $posts, object $q
+ *
+ * @return array
+ *
+ */
+function gcse_fallback($posts, $q)
+{
+    if($q->is_single != true && $q->is_search == true) {
+        if (($posts[0]->filter == 'raw' && $posts[0]->TRUE == '1')) {
+            remove_filter('posts_request','set_dummy_sql',10);
+            remove_filter('posts_results','gcse_results',99);
+            remove_filter('posts_results','fallback_google_cse',100);
+            $posts = $q->get_posts();
+        }
+    }
+    return $posts;
 }
