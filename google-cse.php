@@ -259,7 +259,7 @@ function gcse_set_dummy_sql($sql, $q)
     if($q->is_single !== true && $q->is_search === true) {
         return "SELECT TRUE";
     }
-    remove_filter('posts_request','set_dummy_sql',10);
+    remove_filter('posts_request','gcse_set_dummy_sql',10);
     return $sql;
 }
 
@@ -280,7 +280,7 @@ function gcse_fallback($posts, $q)
 {
     if($q->is_single != true && $q->is_search == true) {
         if (($posts[0]->filter == 'raw' && $posts[0]->TRUE == '1')) {
-            remove_filter('posts_request','set_dummy_sql',10);
+            remove_filter('posts_request','gcse_set_dummy_sql',10);
             remove_filter('posts_results','gcse_results',99);
             remove_filter('posts_results','fallback_google_cse',100);
             $posts = $q->get_posts();
